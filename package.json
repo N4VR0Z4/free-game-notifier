@@ -1,0 +1,12 @@
+{
+  "name": "free-gamer-notifier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "start": "node script.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}
