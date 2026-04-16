@@ -82,4 +82,6 @@ async function sendGiveaway() {
     }
 }
 
+sendGiveaway();
+
 setInterval(sendGiveaway,60000)
