@@ -65,7 +65,7 @@ async function sendGiveaway() {
             ],
         }
 
-        await fetch(WEBHOOK_URL, {
+        const discordResponse = await fetch(WEBHOOK_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -76,6 +76,10 @@ async function sendGiveaway() {
         });
 
         console.log('Giveaway sent to Discord successfully!');
+
+        if (!discordResponse.ok) {
+            console.error('Failed to send giveaway to Discord:', discordResponse.statusText);
+        };
 
     } catch (error) {
         console.error('Error fetching giveaway or sending to Discord:', error);
