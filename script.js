@@ -98,4 +98,4 @@ async function sendGiveaway() {
 
 sendGiveaway();
 
-setInterval(sendGiveaway,600000);
+setInterval(sendGiveaway,30000);
