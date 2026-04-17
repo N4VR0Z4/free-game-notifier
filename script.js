@@ -4,6 +4,8 @@ const http = require("http");
 const WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL;
 const API_URL = process.env.API_URL;
 
+let lastGiveawayId = null;
+
 const server = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('Giveaway Bot is running!');
@@ -24,6 +26,11 @@ async function sendGiveaway() {
         console.log(data);
 
         const {id,title,worth,status,type,platforms,open_giveaway,thumbnail,image,description,instructions} = data[0];
+
+        if (id === lastGiveawayId) {
+            console.log("No new giveaway found.");
+            return;
+        }
 
         const embed = {
             title: `New Giveaway: ${title}`,
@@ -79,6 +86,9 @@ async function sendGiveaway() {
 
         if (!discordResponse.ok) {
             console.error('Failed to send giveaway to Discord:', discordResponse.statusText);
+        }else {
+            lastGiveawayId = id;
+            console.log("Message sent and ID saved to memory.");
         };
 
     } catch (error) {
@@ -88,4 +98,4 @@ async function sendGiveaway() {
 
 sendGiveaway();
 
-setInterval(sendGiveaway,60000)
+setInterval(sendGiveaway,600000);
